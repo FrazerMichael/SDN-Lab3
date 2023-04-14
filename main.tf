@@ -17,6 +17,15 @@ locals {
 }
 
 
+resource "aws_instance" "VM-01" {
+  ami = "ami-06e46074ae430fba6"
+  instance_type = "t2.micro"
+  availability_zone = "us-east-1a"
+  key_name = "KeyS144"
+  tags = { Name = "VM-01" }
+  
+}
+
 module "vpc" {
   source = "github.com/FrazerMichael/Terraform-Modules//aws-vpc"
 
