@@ -8,14 +8,15 @@ terraform {
       name = "GithubAction"
     }
   }
+}
 
-locals = {
+locals {
   cluster-name = "lab3"
   key-name     = "KeyS144"
 }
 
 
-module "vpc" = {
+module "vpc" {
   source = "github.com/FrazerMichael/Terraform-Modules//aws-vpc"
 
   cluster      = local.cluster-name
@@ -25,14 +26,14 @@ module "vpc" = {
   azs          = ["us-east-1a", "us-east-1b"]
 }
 
-module "security-group" = {
+module "security-group" {
   source = "github.com/FrazerMichael/Terraform-Modules//aws-security-group"
 
   cluster = local.cluster-name
   vpc-id  = module.vpc.vpc-id
 }
 
-module "public-ec2" = {
+module "public-ec2" {
   source = "github.com/FrazerMichael/Terraform-Modules//aws-ec2"
 
   user-data   = file("userdata-webserver.sh")
@@ -44,7 +45,7 @@ module "public-ec2" = {
 
 }
 
-module "private-ec2" = {
+module "private-ec2" {
   source = "github.com/FrazerMichael/Terraform-Modules//aws-ec2"
 
   user-data   = file("userdata-webserver.sh")
@@ -53,6 +54,6 @@ module "private-ec2" = {
   SN-id       = module.vpc.private-SN-id
   key         = local.key-name
   private     = true
-  config-name = "2"}
+  config-name = "2"
 }
 
