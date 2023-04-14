@@ -7,7 +7,7 @@ terraform {
     workspaces {
       name = "GithubAction"
     }
-}
+  }
 
 locals {
   cluster-name = "lab3"
@@ -53,6 +53,6 @@ module "private-ec2" {
   SN-id       = module.vpc.private-SN-id
   key         = local.key-name
   private     = true
-  config-name = "2"
-
+  config-name = "2"}
 }
+
