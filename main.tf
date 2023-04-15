@@ -1,4 +1,3 @@
-# test1
 terraform {
   cloud {
     # The name of your Terraform Cloud organization.
@@ -12,18 +11,8 @@ terraform {
 }
 
 locals {
-  cluster-name = "lab3"
+  cluster-name = "SDN-Terraform-Lab3"
   key-name     = "KeyS144"
-}
-
-
-resource "aws_instance" "VM-01" {
-  ami               = "ami-06e46074ae430fba6"
-  instance_type     = "t2.micro"
-  availability_zone = "us-east-1a"
-  key_name          = "KeyS144"
-  tags              = { Name = "VM-01" }
-
 }
 
 module "vpc" {
@@ -66,4 +55,3 @@ module "private-ec2" {
   private     = true
   config-name = "2"
 }
-
